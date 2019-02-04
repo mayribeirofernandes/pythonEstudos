@@ -41,22 +41,35 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: Buy peacock feathers' for row in rows),
-            "New to-do item did not appear in table"
-        )
+        # self.assertTrue(
+        #     any(row.text == '1: Buy peacock feathers' for row in rows),
+        #     f"New to-do item did not appear in table. Contents were:\n{table.text}"
+        # )
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
 
         # Ainda continua havendo uma caixa de texto convidando-a a acrescentar outro
         # item. Ela insere "use peacock feathears to make a fly" (Usar penas de pavão
         # para fazer um fly - Edith é bem metódica)
-        self.fail('Finish this!!!!')
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Use peacock feathers to make a fly')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
+        # self.fail('Finish this!!!!')
 
         # A página é atualizada novamente e agora mostra os 2 itens da sua listas
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        self.assertIn(
+            '2: Use peacock feathers to make a fly',
+            [row.text for row in rows]
+        )
 
         # Edith se pergunta se o site lembrará de sua lista. Então ela nota que o site
-        # gerou um URL único para ela -- há um pequeno texto explicativo para isso
-        # ela acessa essa URL - sua lista de tarefas continua lá
+        # gerou um URL único para ela -- há um pequeno texto explicativo para isso.
+        self.fail('Finish this!')
 
+        # Ela acessa essa URL - sua lista de tarefas continua lá.
         # Satisfeita , ela volta a dormir
 
 
