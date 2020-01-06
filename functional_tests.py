@@ -11,6 +11,7 @@ class NewVisitorTest(unittest.TestCase):
         self.browser = webdriver.Chrome()
 
     def tearDown(self):
+        self.browser.save_screenshot("test.png")
         self.browser.quit()
 
     def check_for_row_in_list_table(self, row_text):
@@ -21,7 +22,7 @@ class NewVisitorTest(unittest.TestCase):
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Edith ouviu falar de uma nova aplicação online interessante
         # para lista de tarefas. Ela decide verificar sua homepage.
-        self.browser.get('http://localhost:8000')
+        self.browser.get('http://127.0.0.1:8000')
 
         # Ela percebe que o título da página e o cabeçalho mencionam listas to-do
         self.assertIn('To-Do', self.browser.title)

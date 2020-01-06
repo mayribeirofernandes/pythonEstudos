@@ -1,0 +1,12 @@
+## Banco de Dados
+    python manage.py migrate (cria)
+    del db.sqlite3
+    python manage.py migrate --noinput (remove os dados)
+
+## Subir o serviço
+    python manage.py runserver
+
+## Rodar o teste
+    python manage.py test
+
+##
