@@ -12,5 +12,3 @@
     python manage.py test functional_tests
     ## somento unit
     python manage.py test lists
-
-##
